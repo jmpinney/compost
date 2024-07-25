@@ -1,0 +1,40 @@
+{
+    "manifest_version": 2,
+    "name": "Link Checker",
+    "version": "1.0",
+    "description": "Check for broken links on a page.",
+    "permissions": [
+      "activeTab",
+      "webRequest",
+      "<all_urls>",
+      "storage"
+    ],
+    "browser_action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": {
+        "16": "icons/icon-16.png",
+        "48": "icons/icon-48.png",
+        "128": "icons/icon-128.png"
+      },
+      "default_title": "Link Checker"
+    },
+    "icons": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "background": {
+      "scripts": ["background.js"]
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "run_at": "document_idle"
+      }
+    ],
+    "web_accessible_resources": [
+      "popup.css"
+    ]
+  }
+  
