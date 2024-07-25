@@ -29,4 +29,5 @@ All these links are actually broken...home page redirect or 404 page. Working as
 # Wishlist Features
 - Highlighting broken links on the webpage
 - Some kind of link rot reporting mechanism/database
+- Automatically fetch archive.org versions and substitute broken links
 
