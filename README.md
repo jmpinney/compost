@@ -1,7 +1,8 @@
 # compost
  a firefox extension for checking link rot
 
-![compost-logo](https://github.com/user-attachments/assets/b4bf31e7-c407-46b1-9ded-1b0a025613b0)
+![compost](https://github.com/user-attachments/assets/e332c11c-af37-4e94-abaa-d812b0a26d5c)
+
 
  # What does it do?
 I'm sick of clicking links and hitting 404 pages, home page redirects or sites that just don't exist anymore. Link rot sucks, and i want a way to know if a link is broken before I click it. This extension counts the number of links present on a webpage and checks each link to see if it returns an HTML status code error. If it does, it counts it as a broken link and displays it as broken.
