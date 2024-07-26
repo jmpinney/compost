@@ -15,7 +15,7 @@ Link rot will become more and more pervasive as time goes on. [Pew Research](htt
 3. To detect broken links, click the extension on the toolbar. 
 
 # Issues
-This has some rough edges and a couple issues I'm working on:
+This has some rough edges and a couple issues I'm working through:
 - Extremely slow on sites with more than a few hundred links
 - Doesn't persist list of broken links when popup is closed and reopened
 - Ugly UI is ugly
@@ -26,7 +26,12 @@ Microsoft redirects all their links... go figure. Will have to figure out how to
 All these links are actually broken...home page redirect or 404 page. Working as expected.
 - <img width="1465" alt="image" src="https://github.com/user-attachments/assets/8ac6a83c-0555-4256-a7a9-e8bd307a0a63">
 
-# Wishlist Features
+# Planned Features
+- When a site is broken, add toggle to report the status code instead of just "broken"
+- Better UI and accessibility features
+- Upload to firefox extensions store
+
+# Features planned if i turn my life around and stop procrastinating 
 - Highlighting broken links on the webpage
 - Some kind of link rot reporting mechanism/database
 - Automatically fetch archive.org versions and substitute broken links
