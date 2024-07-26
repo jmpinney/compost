@@ -11,7 +11,11 @@ chrome.runtime.onMessage.addListener((message) => {
 function countAndFilterLinks(tabId) {
   console.log('Counting and filtering links...');
   const links = Array.from(document.querySelectorAll('body a:not(header a):not(footer a)'));
-  const filteredLinks = links.filter(link => !link.href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i) && !link.href.startsWith('mailto:'));
+  const filteredLinks = links.filter(link => 
+    !link.href.match(/\.(jpg|jpeg|png|gif|bmp|svg)$/i) && 
+    !link.href.startsWith('mailto:') && 
+    !link.href.startsWith('javascript:')
+  );
   const totalLinks = filteredLinks.length;
   const linkArray = filteredLinks.map(link => link.href);
 
@@ -31,11 +35,17 @@ function countAndFilterLinks(tabId) {
   checkLinksExcludingHeaderFooter(tabId, linkArray);
 }
 
-async function checkLink(url) {
+async function checkLink(url, retry = 3) {
   try {
-    const response = await fetch(url, { method: 'HEAD' });
+    const response = await fetch(url, { method: 'GET', redirect: 'follow' });
+    console.log(`Checked URL: ${url} - Status: ${response.status}`);
     return response.ok;
   } catch (error) {
+    console.log(`Error checking URL: ${url} - ${error.message}`);
+    if (retry > 0) {
+      console.log(`Retrying ${url}, attempts left: ${retry}`);
+      return await checkLink(url, retry - 1);
+    }
     return false;
   }
 }
@@ -56,21 +66,13 @@ async function checkLinksExcludingHeaderFooter(tabId, linkArray) {
         status: 'Broken or CORS issue',
         tabId: tabId
       });
-      chrome.runtime.sendMessage({
-        command: "updateBadge",
-        tabId: tabId,
-        text: linkStatuses.length.toString()
-      });
+      updateBadge(tabId, linkStatuses.length);
     }
   }
 
   const brokenLinkCount = linkStatuses.length;
   console.log('Broken link count:', brokenLinkCount);
-  chrome.runtime.sendMessage({
-    command: "updateBadge",
-    tabId: tabId,
-    text: brokenLinkCount.toString()
-  });
+  updateBadge(tabId, brokenLinkCount);
 
   chrome.storage.local.get(tabId, (result) => {
     const tabData = result[tabId];
@@ -90,4 +92,10 @@ async function checkLinksExcludingHeaderFooter(tabId, linkArray) {
       console.warn(`Link: ${link}, Status: ${status}`);
     });
   }
+}
+
+// Function to update the badge
+function updateBadge(tabId, count) {
+  chrome.browserAction.setBadgeText({ text: count.toString(), tabId: tabId });
+  chrome.browserAction.setBadgeBackgroundColor({ color: "#FF0000" });
 }
