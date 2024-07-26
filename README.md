@@ -7,7 +7,7 @@
  # What does it do?
 I'm sick of clicking links and hitting 404 pages, home page redirects or sites that just don't exist anymore. Link rot sucks, and i want a way to know if a link is broken before I click it. This extension counts the number of links present on a webpage and checks each link to see if it returns an HTML status code error. If it does, it counts it as a broken link and displays it as broken.
 
-Link rot will become more and more pervasive as time goes on. [Pew Research](https://www.pewresearch.org/data-labs/2024/05/17/when-online-content-disappears/) says that 38% of webpages available in 2013 are no longer accesible in 2024. That sucks!
+Link rot will become more and more pervasive as time goes on. [Pew Research](https://www.pewresearch.org/data-labs/2024/05/17/when-online-content-disappears/) says that 38% of webpages available in 2013 are no longer accesible in 2024. That sucks! 
 
 # Steps to load the extension:
 1. Download folder
@@ -19,6 +19,8 @@ This has some rough edges and a couple issues I'm working through:
 - Extremely slow on sites with more than a few hundred links
 - Doesn't persist list of broken links when popup is closed and reopened
 - Ugly UI is ugly
+- Doesn't run automatically
+- Need to figure out CORS... i'm a system engineer, not a web developer, so this is a new concept to me
 
 Microsoft redirects all their links... go figure. Will have to figure out how to detect that while still detecting homepage redirects for missing pages. 
 - ![image](https://github.com/user-attachments/assets/1676ed04-319f-48bc-bfaf-b467526f46e2)
@@ -30,6 +32,7 @@ All these links are actually broken...home page redirect or 404 page. Working as
 - When a site is broken, add toggle to report the status code instead of just "broken"
 - Better UI and accessibility features
 - Upload to firefox extensions store
+- Automatically run on page load instead of manually initiating the scan
 
 # Features planned if i turn my life around and stop procrastinating 
 - Highlighting broken links on the webpage
